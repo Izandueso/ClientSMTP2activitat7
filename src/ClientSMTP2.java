@@ -67,12 +67,24 @@ public class ClientSMTP2 {
 					
 					System.out.println("Introduce una direccion de destino: Exemple -> izandueso@gmail.com");
 					String desti1 = teclado.nextLine();
-					
+					while (desti1.length() > 100){
+						System.out.println("Error, el correu de desti es invalid, torna-ho a introduir-lo: ");
+						desti1 = teclado.nextLine();
+					}
 					System.out.println("Introduce un asunto para el correo: ");
 					String asumpte = teclado.nextLine();
+					while(asumpte.length() > 100){
+						System.out.println("Error, el assumpte es massa llarg, torna-ho a introduir:");
+						asumpte = teclado.nextLine();
+						
+					}
 					
 					System.out.println("Introduce el mensaje que deseas enviar: ");
 					String missatge = teclado.nextLine();
+					while(missatge.length() > 2000){
+						System.out.println("Error, el missatge es massa gran, torna-ho a introduir: ");
+						missatge = teclado.nextLine();
+					}
 					
 					//Es crea la capçalera
 					SimpleSMTPHeader capcalera = new SimpleSMTPHeader(username, desti1, asumpte);

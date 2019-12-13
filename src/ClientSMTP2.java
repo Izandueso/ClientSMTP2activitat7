@@ -5,6 +5,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.Scanner;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
@@ -15,13 +16,15 @@ public class ClientSMTP2 {
 	
 	public static void main (String[] args) throws NoSuchAlgorithmException, UnrecoverableKeyException, KeyStoreException, InvalidKeyException, InvalidKeySpecException {
 		
+		Scanner teclado = new Scanner(System.in);
+		
 		//Es crea el client SMTP segur
 		AuthenticatingSMTPClient client = new AuthenticatingSMTPClient();
 		
 		//Dades d'usuari i del servidor
 		String server = "smtp.gmail.com";
-		String username = "profebaixcamp@gmail.com";
-		String contrasenya = "xxxxxxxxxxxxxx";
+		String username = "correopruebasizan@gmail.com";
+		String contrasenya = "xxxxxxxxxxxxx";
 		int port = 587;
 		
 		try {
@@ -61,9 +64,15 @@ public class ClientSMTP2 {
 				if (client.auth(AuthenticatingSMTPClient.AUTH_METHOD.PLAIN, username, contrasenya)) {
 					
 					System.out.println("4 -"+client.getReplyString());
-					String desti1 = "pferre2@xtec.cat";
-					String asumpte = "Prova SMTPClient";
-					String missatge = "Hola. \nSalutacions. \nFent servir GMAIL. \nAdeu.";
+					
+					System.out.println("Introduce una direccion de destino: Exemple -> izandueso@gmail.com");
+					String desti1 = teclado.nextLine();
+					
+					System.out.println("Introduce un asunto para el correo: ");
+					String asumpte = teclado.nextLine();
+					
+					System.out.println("Introduce el mensaje que deseas enviar: ");
+					String missatge = teclado.nextLine();
 					
 					//Es crea la capçalera
 					SimpleSMTPHeader capcalera = new SimpleSMTPHeader(username, desti1, asumpte);
